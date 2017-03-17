@@ -1,7 +1,7 @@
 FILES = src/*.cpp lib/*.cpp
 
 CC = g++
-CFLAGS = -std=c++11
+CFLAGS = -std=c++11 -g
 
 all:
 	mkdir -p bin

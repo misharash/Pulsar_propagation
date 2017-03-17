@@ -1,5 +1,6 @@
 #pragma PULSAR_PARAMETERS
 using namespace std;
+#include <string>
 
 double read_from_file (const string param);
 
