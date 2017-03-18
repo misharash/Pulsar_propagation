@@ -9,6 +9,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <fenv.h> //for NaN tracking
+
 using namespace std;
 
 #include "../lib/constants.h"
@@ -31,6 +33,8 @@ void displayVector (vector <double> a) {
 }
 
 int main() {
+    feenableexcept(FE_INVALID | FE_OVERFLOW); //for NaN tracking
+    
     cout << "\nR_esc: " << RESCAPE << endl;
     cout << "R_A: " << ROMODE << endl;
     cout << "R_lc: " << RLC << endl << endl;
@@ -104,6 +108,7 @@ int main() {
             dep_vars[1] = Arcsinh(-1.0 / Q(x1)) / 2.0;
         }
         /*--------------*/
+        cout << "dep_vars before " << dep_vars[0] << " " << dep_vars[1] << endl; //temp
 
         double PA = dep_vars[0] * 180 / PI;
         double tau = PI * R_star * integrate(dtau, x1, RLC) / (c * omega);
@@ -117,6 +122,8 @@ int main() {
         int nvar = 2, nok = 0, nbad = 0;
         double deps = 1.0, h1 = 1.0e-14, hmin = 1.0e-15;
         odeint(dep_vars, nvar, x1, x2, deps, h1, hmin, nok, nbad, RHS);
+        
+        cout << "dep_vars after " << dep_vars[0] << " " << dep_vars[1] << endl; //temp
 
         VV = II * tanh(2.0 * dep_vars[1]);
         PA = dep_vars[0] * 180 / PI;

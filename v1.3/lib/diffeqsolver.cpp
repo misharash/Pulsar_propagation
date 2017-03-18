@@ -174,6 +174,8 @@ void odeint(
             }
         }
         if ((x+h-x2)*(x+h-x1) > 0.0) h=x2-x;
+        
+        plot << y[0] << " " << y[1] << " " << dydx[0] << " " << dydx[1] << " " << x << endl; //temp
 
         (rkqc)(y, dydx, nvar, &x, h, eps, yscal, &hdid, &hnext, derivs);
 

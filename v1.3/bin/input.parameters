@@ -15,5 +15,5 @@ alpha_deg   60.0
 beta_deg    -5.0
 
 phi_start   -1.0       # Start from phase
-phi_end     15.0        # End with phase
+phi_end     -1.0        # End with phase
 phi_step    1.0         # Step phase
